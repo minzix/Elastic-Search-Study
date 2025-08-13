@@ -1,6 +1,7 @@
 package study.elastic.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import study.elastic.domain.UserDocument;
 import study.elastic.dto.UserCreateRequestDTO;
 import study.elastic.repository.UserDocumentRepository;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("users")
@@ -27,7 +30,13 @@ public class UserController {
     };
 
     @GetMapping
-    public Page<UserDocument> getUsers() {
+    public Page<UserDocument> findUsers() {
         return userDocumentRepository.findAll(PageRequest.of(0, 10));
     };
+
+    @GetMapping("/{id}")
+    public UserDocument findUserById(@PathVariable String id) {
+        return userDocumentRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("사용자가 존재하지 않음."));
+    }
 }
