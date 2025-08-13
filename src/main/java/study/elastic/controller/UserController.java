@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import study.elastic.domain.UserDocument;
 import study.elastic.dto.UserCreateRequestDTO;
+import study.elastic.dto.UserUpdateRequestDTO;
 import study.elastic.repository.UserDocumentRepository;
 
 import java.util.Optional;
@@ -36,7 +37,17 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserDocument findUserById(@PathVariable String id) {
-        return userDocumentRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("사용자가 존재하지 않음."));
+        return userDocumentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("사용자가 존재하지 않음."));
     }
+
+    @PutMapping("/{id}")
+    public UserDocument updateUser(@PathVariable String id, @RequestBody UserUpdateRequestDTO requestDTO) {
+        UserDocument existingUser = userDocumentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("사용자가 존재하지 않음."));
+        existingUser.setName(requestDTO.getName());
+        existingUser.setAge(requestDTO.getAge());
+        existingUser.setIsActive(requestDTO.getIsActive());
+        return userDocumentRepository.save(existingUser);
+    };
 }
