@@ -18,4 +18,11 @@ public class UserDocument {
 
     @Field(type = FieldType.Boolean)
     private Boolean isActive;
+
+    public UserDocument(String id, String name, Long age, Boolean isActive) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.isActive = isActive;
+    }
 }
