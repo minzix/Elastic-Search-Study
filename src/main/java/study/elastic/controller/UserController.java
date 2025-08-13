@@ -13,7 +13,7 @@ import study.elastic.repository.UserDocumentRepository;
 @RequestMapping("users")
 @RequiredArgsConstructor
 public class UserController {
-    private UserDocumentRepository userDocumentRepository;
+    private final UserDocumentRepository userDocumentRepository;
 
     @PostMapping
     public UserDocument createUser(@RequestBody UserCreateRequestDTO requestDTO) {
