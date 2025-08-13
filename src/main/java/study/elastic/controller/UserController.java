@@ -14,4 +14,5 @@ import study.elastic.repository.UserDocumentRepository;
 public class UserController {
     private UserDocumentRepository userDocumentRepository;
 
+
 }
