@@ -1,4 +1,4 @@
-package study.elastic;
+package study.elastic.repository;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import study.elastic.domain.UserDocument;
