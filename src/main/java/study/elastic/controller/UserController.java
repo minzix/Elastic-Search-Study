@@ -1,10 +1,10 @@
 package study.elastic.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 import study.elastic.domain.UserDocument;
 import study.elastic.dto.UserCreateRequestDTO;
 import study.elastic.repository.UserDocumentRepository;
@@ -24,5 +24,10 @@ public class UserController {
                 requestDTO.getIsActive()
         );
         return userDocumentRepository.save(user);
-    }
+    };
+
+    @GetMapping
+    public Page<UserDocument> getUsers() {
+        return userDocumentRepository.findAll(PageRequest.of(0, 10));
+    };
 }
