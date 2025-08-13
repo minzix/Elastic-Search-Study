@@ -1,17 +1,13 @@
 package study.elastic.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import study.elastic.domain.UserDocument;
 import study.elastic.dto.UserCreateRequestDTO;
 import study.elastic.dto.UserUpdateRequestDTO;
 import study.elastic.repository.UserDocumentRepository;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("users")
